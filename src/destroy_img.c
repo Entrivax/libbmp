@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_pixel.c                                        :+:      :+:    :+:   */
+/*   destroy_img.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpilotto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/19 10:32:55 by lpilotto          #+#    #+#             */
-/*   Updated: 2016/08/23 15:53:38 by lpilotto         ###   ########.fr       */
+/*   Created: 2016/08/23 11:44:51 by lpilotto          #+#    #+#             */
+/*   Updated: 2016/08/23 16:16:41 by lpilotto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libbmp.h"
+#include <stdlib.h>
 
-void	set_pixel(t_image *img, int x, int y, t_rgb rgb)
+void	destroy_image(t_image *img)
 {
-	img->data[x + y * img->width] = rgb;
+	if (!img)
+		return ;
+	if (img->data)
+		free(img->data);
+	img->data = NULL;
+	free(img);
 }

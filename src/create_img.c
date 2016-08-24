@@ -6,20 +6,28 @@
 /*   By: lpilotto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/19 15:40:30 by lpilotto          #+#    #+#             */
-/*   Updated: 2016/08/22 10:47:44 by lpilotto         ###   ########.fr       */
+/*   Updated: 2016/08/23 15:51:27 by lpilotto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libbmp.h"
 #include <stdlib.h>
+#include <unistd.h>
 
 t_palette	*create_palette(int size)
 {
 	t_palette	*pal;
+	size_t		i;
 
 	if (!(pal = (t_palette *)malloc(sizeof(t_palette))))
 		return (NULL);
 	pal->count = size;
+	i = 0;
+	while (i < 256 * sizeof(t_rgb))
+	{
+		((unsigned char *)pal->colors)[i] = 0;
+		i++;
+	}
 	return (pal);
 }
 
@@ -32,7 +40,7 @@ t_palette	*create_safety_palette(void)
 	if (!(pal = create_palette(256)))
 		return (NULL);
 	rgb[0] = -51;
-	i = 20;
+	i = 2;
 	pal->colors[0] = get_rgb(0, 0, 0);
 	pal->colors[1] = get_rgb(255, 255, 255);
 	while ((rgb[0] += 51) <= 255)
@@ -51,21 +59,18 @@ t_palette	*create_safety_palette(void)
 	return (pal);
 }
 
-t_image		*create_image(int width, int height, int type, t_palette *palette)
+t_image		*create_image(int width, int height)
 {
 	t_image		*img;
 
 	if ((img = (t_image *)malloc(sizeof(t_image))) == NULL)
 		return (NULL);
-	img->type = type;
 	img->width = width;
 	img->height = height;
-	if ((img->data = malloc(img->height * (img->width + BMP_PADDING(img))
-				* BMP_24 / 8)) == NULL)
+	if ((img->data = malloc(img->height * img->width * sizeof(t_rgb))) == NULL)
 	{
 		free(img);
 		return (NULL);
 	}
-	img->palette = palette;
 	return (img);
 }
