@@ -20,7 +20,8 @@ static int		write_header(int fd, t_image *img, int palette, int bpp)
 	char	header[54];
 
 	*((short *)(header + 0x0)) = 0x4d42;
-	*((int *)(header + 0x2)) = img->width * img->height * bpp + 54;
+	*((int *)(header + 0x2)) = img->width * img->height * bpp / 8 + 54
+        + BMP_PADDING(img, bpp);
 	*((int *)(header + 0x6)) = 0x0;
 	*((int *)(header + 0xA)) = 54;
 	*((int *)(header + 0xE)) = 40;
@@ -29,7 +30,7 @@ static int		write_header(int fd, t_image *img, int palette, int bpp)
 	*((short *)(header + 0x1A)) = 0x1;
 	*((short *)(header + 0x1C)) = bpp;
 	*((int *)(header + 0x1E)) = 0x0;
-	*((int *)(header + 0x22)) = img->width * img->height * bpp
+	*((int *)(header + 0x22)) = img->width * img->height * bpp / 8
 		+ BMP_PADDING(img, bpp);
 	*((int *)(header + 0x26)) = 0x0b13;
 	*((int *)(header + 0x2A)) = 0x0b13;

@@ -15,8 +15,8 @@
 
 # define BMP_24 24
 # define BMP_8 8
-# define BMP_LINE_PADDING(img, bpp) ((img->width * bpp) % 4)
-# define BMP_PADDING(img, bpp) (((img->width * bpp) % 4) * img->height)
+# define BMP_LINE_PADDING(img, bpp) ((img->width * bpp / 8) % 4)
+# define BMP_PADDING(img, bpp) (((img->width * bpp / 8) % 4) * img->height)
 
 typedef struct		s_rgb
 {
