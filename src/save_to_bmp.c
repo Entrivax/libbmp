@@ -121,7 +121,7 @@ int				save_to_bmp_8(char *file, t_image *img, t_palette *palette)
 	i = -1;
 	while (++i < img->height * img->width)
 		buf[i] = get_closest_index_palette(palette, img->data[i %
-			img->width + (img->height - i / img->width) * img->width]);
+			img->width + (img->height - i / img->width - 1) * img->width]);
 	write(fd, buf, img->width * img->height);
 	free(buf);
 	close(fd);
