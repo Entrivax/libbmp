@@ -71,11 +71,11 @@ static void			prepare_24_bits_buf(t_image *img, char *buf)
 		while (++x < img->width)
 		{
 			*(buf + padding + (x + y * img->width) * 3) =
-				img->data[x + (img->height - y) * img->width].b;
+				img->data[x + (img->height - y - 1) * img->width].b;
 			*(buf + padding + (x + y * img->width) * 3 + 1) =
-				img->data[x + (img->height - y) * img->width].g;
+				img->data[x + (img->height - y - 1) * img->width].g;
 			*(buf + padding + (x + y * img->width) * 3 + 2) =
-				img->data[x + (img->height - y) * img->width].r;
+				img->data[x + (img->height - y - 1) * img->width].r;
 		}
 		padding += BMP_LINE_PADDING(img, 24);
 	}
