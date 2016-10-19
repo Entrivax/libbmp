@@ -6,7 +6,7 @@
 /*   By: lpilotto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/17 15:12:15 by lpilotto          #+#    #+#             */
-/*   Updated: 2016/08/24 16:52:17 by lpilotto         ###   ########.fr       */
+/*   Updated: 2016/10/19 16:44:06 by lpilotto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int		write_header(int fd, t_image *img, int palette, int bpp)
 
 	*((short *)(header + 0x0)) = 0x4d42;
 	*((int *)(header + 0x2)) = img->width * img->height * bpp / 8 + 54
-        + BMP_PADDING(img, bpp);
+		+ BMP_PADDING(img, bpp);
 	*((int *)(header + 0x6)) = 0x0;
 	*((int *)(header + 0xA)) = 54;
 	*((int *)(header + 0xE)) = 40;
@@ -57,7 +57,7 @@ static int		write_palette(int fd, t_palette *palette)
 	return (0);
 }
 
-static void			prepare_24_bits_buf(t_image *img, char *buf)
+static void		prepare_24_bits_buf(t_image *img, char *buf)
 {
 	long	x;
 	long	y;
@@ -103,8 +103,8 @@ int				save_to_bmp_24(char *file, t_image *img)
 
 int				save_to_bmp_8(char *file, t_image *img, t_palette *palette)
 {
-	int		fd;
-	int		palettec;
+	int				fd;
+	int				palettec;
 	ssize_t			i;
 	unsigned char	*buf;
 
