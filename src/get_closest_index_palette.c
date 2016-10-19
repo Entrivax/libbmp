@@ -12,13 +12,6 @@
 
 #include "libbmp.h"
 
-/*static int			i_abs(int a)
-{
-	if (a < 0)
-		return (-a);
-	return (a);
-}*/
-
 static int			pow2(int a)
 {
 	return (a * a);
